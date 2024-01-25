@@ -1,19 +1,17 @@
+import { Contact } from "../views/contact";
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			
+			contact: [],
+
+			usuarios: [],
+
+			contacts: []
 		},
+
+		
 		actions: {
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
@@ -25,6 +23,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				*/
 			},
 			changeColor: (index, color) => {
+				
 				//get the store
 				const store = getStore();
 
@@ -37,7 +36,35 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				//reset the global store
 				setStore({ demo: demo });
-			}
+			},
+
+			addContact: (Name, Email, Phone, Address, redireccionar ) => {
+				setTimeout(() => {
+					const store = getStore();
+					let nuevoUsuario = {
+						FullName: Name,
+						Email: Email,
+						Phone: Phone,
+						Address: Address
+					}
+
+					let nuevaListaUsuarios  = [... store.usuarios, nuevoUsuario]
+					setStore({usuarios: nuevaListaUsuarios});
+					redireccionar()
+					
+				}, 3000);
+
+			},
+			loadContacts: () => {
+				fetch ("https://playground.4geeks.com/apis/fake/contact/agenda/diegoF")
+				.then((response) => response.json())
+				.then((response) => {setStore({contacts:response})})
+				.catch(error => console.log (error))
+				
+			},
+
+			
+          
 		}
 	};
 };
