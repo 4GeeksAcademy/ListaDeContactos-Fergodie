@@ -6,31 +6,23 @@ import { Context } from "../store/appContext";
 
 import "../../styles/demo.css";
 
+
 export const AddContact = () => {
     const { store, actions } = useContext(Context);
     const navigate = useNavigate()
     const [data, setData] = useState({
-		agenda_slug : "diegoF"});
-    const handleChange = (event) =>{
-        setData({...data, [event.target.name]: event.target.value});
+        agenda_slug: "diegoF"
+    });
+    const handleChange = (event) => {
+        setData({ ...data, [event.target.name]: event.target.value });
     }
     const handleSubmit = (event) => {
         event.preventDefault();
-        const config = {
-            method: "POST",
-            body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'application/json'
-            }
+        function volverHome () {
+            navigate("/")
         }
-        console.log(data)
-		fetch("https://playground.4geeks.com/apis/fake/contact/", config)
-			.then((response) => response.text())
-			.catch(error => console.log('error', error))
-			.then(response => {
-				actions.loadContacts();
-				navigate("/");
-			});
+        actions.añadirContact(data, volverHome)
+     
     }
 
 
