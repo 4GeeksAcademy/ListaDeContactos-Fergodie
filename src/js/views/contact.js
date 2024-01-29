@@ -13,16 +13,19 @@ export const Contact = () => {
 		<div className="container">
 
 			<h1>Cantidad de contactos: {store.contacts.length}</h1>
-			<ul>
-				{store.contacts.map((contact, index) => {
-					return (
-						<li className="row contact" key={index}>
-							<ContactCard contact={contact} />
-						</li>
-					)
+			<div className="p-2">
+				<ul>
+					{store.contacts.map((contact, index) => {
+						return (
+							<li className="row contact" key={index}>
+								<ContactCard contact={contact} />
+							</li>
+						)
 
-				})}
-			</ul>
+					})}
+				</ul>
+
+			</div>
 		</div>
 
 

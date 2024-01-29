@@ -106,12 +106,35 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 
+			editContact: (id, updatedContact, volverHome) => {
+
+				fetch(`https://playground.4geeks.com/apis/fake/contact/${id}`, {
+					method: 'PUT',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(updatedContact),
+				})
+					.then(response => {
+						if (response.ok) {
+							// Puedes agregar lógica adicional aquí después de una solicitud exitosa
+							console.log('editado exitosamente');
+							getActions().loadContacts();
+							volverHome()
+						} else {
+							// Manejo de errores, puedes lanzar una excepción o despachar otras acciones
+							console.error('Error al editar el contacto');
+						}
+					})
+					.catch(error => {
+						console.error('Error en la solicitud PUT:', error);
+					});
 
 
 
 
-		}
+			},
+		},
 	};
-};
-
+}
 export default getState;
